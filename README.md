@@ -1,0 +1,1 @@
+# status.ajito.vg
