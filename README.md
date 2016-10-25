@@ -1,1 +1,1 @@
-# status.ajito.vg
+# status.ajito.vg## AbstractStatus page for ajito.vgPeople can ask there are ajiting people.People can respond there are ajiting people.## Architecture#### Client- S3 web site hosting- React.js#### Server- API Gateway- AWS Lambda- Slack Incoming Webhook- Slack slash command## Appendix- [https://status.github.com/](https://status.github.com/)- [https://www.traviscistatus.com/](https://www.traviscistatus.com/)- [https://status.heroku.com/](https://status.heroku.com/)
