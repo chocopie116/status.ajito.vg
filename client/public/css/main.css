@@ -1,9 +1,16 @@
 body {
     background-color: black;
+    color: white;
 }
 
 .darkness {
     opacity: 0.6;
 }
 
+.icon {
+    background-image: url("img/signal/green.png");
+    background-repeat: no-repeat;
+    width:100%;
+    height:100%;
+}
 
