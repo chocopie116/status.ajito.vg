@@ -13,8 +13,14 @@
 <meta property="og:site_name" content="status.ajito.vg" />
 <link rel="icon" href="" />
 <link rel="apple-touch-icon-precomposed" href="" />
-<link rel="stylesheet" href="" media="screen, print" />
-<script type="text/javascript" src=""></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="css/main.css" media="screen, print" />
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-TESTETST']);
@@ -29,6 +35,14 @@
 </head>
 
 <body>
-  <img src="img/ajito.jpg">
+  <div class="container">
+    <img id="js-image" class="darkness" src="img/ajito.jpg">
+  </div>
+  <script>
+var $image = $('#js-image');
+setTimeout(function() {
+  $image.removeClass('darkness');
+}, 1000);
+  </script>
 </body>
 </html>
