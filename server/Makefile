@@ -3,5 +3,5 @@ deploy:zip
 	rm deploy.zip
 
 zip:
-	zip -r deploy.zip message.js getMessage.js node_modules
+	zip -r deploy.zip message.js getMessage.js postMessage.js node_modules
 

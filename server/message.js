@@ -22,9 +22,9 @@ var storeMessage = function (color, message) {
         Item: {
             'key':     	 {"S": 'messages'},
             'timestamp': {"N": String(timestamp)},
-            'status':    {"S": 'yellow'},
+            'status':    {"S": color},
             'user'  :    {"S": 'annonymous'},
-            'message':   {"S": "いまいる?"},
+            'message':   {"S": message},
             'date':      {"S": String(date)}
 
         }
