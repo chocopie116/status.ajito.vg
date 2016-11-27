@@ -8,13 +8,21 @@ AWS.config.update({
 });
 var dynamodb = new AWS.DynamoDB();
 
+var DEFAULT_MESSAGES = {
+    yellow: '誰かいます?',
+    red:    '誰もいなさそうです',
+    green:  '飲んでますよ'
+};
 /**
  * @param string statusNum 色 yellow:ask, green:some one, red:no one
  * @param string message   表示文章
  *
  * @return Promise
  */
-var storeMessage = function (color, message) {
+var storeMessage = function (color, message, user) {
+    message = message || DEFAULT_MESSAGES[color];
+    user = user || 'annonymous';
+
     var date = new Date();
     var timestamp = Math.floor(date.getTime() / 1000 );
     var params = {
@@ -23,7 +31,7 @@ var storeMessage = function (color, message) {
             'key':     	 {"S": 'messages'},
             'timestamp': {"N": String(timestamp)},
             'status':    {"S": color},
-            'user'  :    {"S": 'annonymous'},
+            'user'  :    {"S": user},
             'message':   {"S": message},
             'date':      {"S": String(date)}
 
