@@ -9,20 +9,24 @@ AWS.config.update({
 var dynamodb = new AWS.DynamoDB();
 
 /**
- * @param int    statusNum ステータス 1:ask, 2:ok, 3:ng
+ * @param string statusNum 色 yellow:ask, green:some one, red:no one
  * @param string message   表示文章
  *
  * @return Promise
  */
-var storeMessage = function (statusNum, message) {
-    var timestamp = Math.floor(new Date().getTime() / 1000 );
+var storeMessage = function (color, message) {
+    var date = new Date();
+    var timestamp = Math.floor(date.getTime() / 1000 );
     var params = {
         TableName: 'ajito.messages',
         Item: {
             'key':     	 {"S": 'messages'},
             'timestamp': {"N": String(timestamp)},
-            'status':    {"N": String(1)},
-            'message':   {"S": "Hello"}
+            'status':    {"S": 'yellow'},
+            'user'  :    {"S": 'annonymous'},
+            'message':   {"S": "いまいる?"},
+            'date':      {"S": String(date)}
+
         }
     };
 
@@ -59,7 +63,17 @@ var readMessages = function() {
                 return reject(err);
             }
 
-            return resolve(data);
+            var result = [];
+            data.Items.forEach(function(r) {
+                result.push({
+                    user:       r.user.S,
+                    status:     r.status.S,
+                    message:    r.message.S,
+                    created_at: r.date.S,
+                    timestamp:  r.timestamp.N
+                });
+            });
+            return resolve(result);
         });
     });
 };
