@@ -35,7 +35,8 @@ params = {
             'ComparisonOperator': 'EQ',
             'AttributeValueList': [{S: 'messages'}]
         }
-    }
+    },
+    Limit: 10
 };
 
 dynamodb.query(params, function (err, data) {
