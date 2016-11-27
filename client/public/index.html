@@ -20,17 +20,6 @@
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
   crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-TESTETST']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 <style>
   body {
       background-color: black;
@@ -45,6 +34,7 @@
 <body>
   <div class="container">
     <img id="js-image" class="darkness" src="img/ajito.jpg">
+
      <table class="table">
      <thead>
        <tr>
@@ -54,39 +44,49 @@
        <th>message</th>
        </tr>
      </thead>
-     <tbody>
-       <tr>
-         <th><img src="img/signal/green.png"></th>
-         <td>2016/10/31 21:40:34(JST)</td>
-         <td>chocopie116</td>
-         <td>People are drinking.</td>
-       </tr>
-       <tr>
-         <th><img src="img/signal/yellow.png"></th>
-         <td>2016/10/31 21:30:34(JST)</td>
-         <td>tsubasa</td>
-         <td>Are there?</td>
-       </tr>
-       <tr>
-         <th><img src="img/signal/red.png"></th>
-         <td>2016/10/30 21:40:34(JST)</td>
-         <td>system</td>
-         <td>no one.</td>
-       </tr>
-       <tr>
-         <th><img src="img/signal/yellow.png"></th>
-         <td>2016/10/30 21:30:34(JST)</td>
-         <td>tsubasa</td>
-         <td>Are there?</td>
-       </tr>
+     <tbody id="dashboard">
      </tbody>
      </table>
+     <p onClick="postPing()">PING</p>
+
   </div>
   <script>
 var $image = $('#js-image');
+
 setTimeout(function() {
   $image.removeClass('darkness');
 }, 1000);
+
+$(function() {
+  var $dashboard = $('#dashboard');
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages',
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function(response) {
+      response.forEach(function(res) {
+        //手抜き
+        $dashboard.append('<tr><th><img src="img/signal/' + res.status + '.png"></th> <td>' + res.created_at +'</td> <td>'+ res.user +'</td> <td>' + res.message + '</td> </tr>');
+      });
+    }
+  })
+
+});
+
+function postPing() {
+  $.ajax({
+    type: 'POST',
+    url: 'https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages',
+    data: JSON.stringify({color:'green', message: 'いる?'}),
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function(response) {
+      console.log(response);
+    }
+  })
+};
   </script>
 </body>
 </html>
