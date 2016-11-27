@@ -11,6 +11,8 @@ var dynamodb = new AWS.DynamoDB();
 /**
  * @param int    statusNum ステータス 1:ask, 2:ok, 3:ng
  * @param string message   表示文章
+ *
+ * @return Promise
  */
 var storeMessage = function (statusNum, message) {
     var timestamp = Math.floor(new Date().getTime() / 1000 );
@@ -24,15 +26,20 @@ var storeMessage = function (statusNum, message) {
         }
     };
 
-    dynamodb.putItem(params, function (err, data) {
-        if (err) {
-            console.log(err, err.stack);
-        } else {
-            console.log(data);
-        }
+    return new Promise(function(resolve, reject) {
+        dynamodb.putItem(params, function (err, data) {
+            if (err) {
+                return reject(err);
+            }
+        });
+
+        return resolve(data);
     });
 };
 
+/**
+ * @return Promise
+ */
 var readMessages = function() {
     var params = {
         TableName: 'ajito.messages',
@@ -46,12 +53,14 @@ var readMessages = function() {
         ScanIndexForward: false //sortKeyで降順
     };
 
-    dynamodb.query(params, function (err, data) {
-        if (err) {
-            console.log(err,err.stack);
-        } else {
-            console.log(data);
-        }
+    return new Promise(function(resolve, reject) {
+        dynamodb.query(params, function (err, data) {
+            if (err) {
+                return reject(err);
+            }
+
+            return resolve(data);
+        });
     });
 };
 
