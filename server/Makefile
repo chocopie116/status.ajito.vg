@@ -1,6 +1,7 @@
 deploy:zip
-	cp twitter.zip ~/Desktop/
+	cp deploy.zip ~/Desktop/
+	rm deploy.zip
 
 zip:
-	zip -r twitter.zip index.js node_modules
+	zip -r deploy.zip message.js index.js node_modules
 
