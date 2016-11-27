@@ -16,7 +16,7 @@ var params = {
         'key':     	 {"S": key},
         'timestamp': {"N": String(timestamp)},
         'status':    {"N": String(1)},
-        'message':   {"S": "お腹すいたけど、どうだろう"}
+        'message':   {"S": "Hello"}
     }
 };
 
@@ -36,7 +36,8 @@ params = {
             'AttributeValueList': [{S: 'messages'}]
         }
     },
-    Limit: 10
+    Limit: 5,
+    ScanIndexForward: false
 };
 
 dynamodb.query(params, function (err, data) {
