@@ -1,10 +1,13 @@
 var message = require('./message');
 
 exports.handler = function(event, context, callback) {
-    //slackのコマンドの引数にokが入っている場合は-1以外になる
-    //var containsOkCommand = event.text.indexOf('ok') != -1;
-    //var color = (containsOkCommand) ? 'green' : 'red';
-    message.storeMessage('green').then(function() {
-            callback(null, null);
+    var slackMessage = event.event.text;
+    var userName = event.event.user_name;
+    //slackのコマンドの引数にokの文字列が入っている場合はgreen
+    var containsOkCommand = slackMessage.indexOf('ok') != -1;
+    var color = (containsOkCommand) ? 'green' : 'red';
+    message.storeMessage(color, slackMessage, userName).then(function() {
+            callback(null, slackMessage);
         });
 }
+
