@@ -1,4 +1,5 @@
 var AWS = require('aws-sdk');
+var request = require('request');
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -13,6 +14,33 @@ var DEFAULT_MESSAGES = {
     red:    '誰もいなさそうです',
     green:  '飲んでますよ'
 };
+
+var SLACK_ICON_MAPS = {
+    yellow: ':yellow_heart:',
+    red:    ':red_circle:',
+    green:  ':green_heart:'
+};
+
+var slackNotify = function(color, message, user) {
+    var options = {
+        uri: process.env.SLACK_WEBHOOK_URL,
+        headers: {'Content-type': 'applicationjson'},
+        json: {
+            username: user,
+            text: SLACK_ICON_MAPS[color] + " " + message,
+            icon_emoji: ':ajiting:',
+            channel: '#ajiting'
+        }
+    };
+    request.post(options, function(error, response, body){
+        if (!error && response.statusCode == 200) {
+            console.log(body);
+        } else {
+            console.log('error: '+ response.statusCode + body);
+        }
+    });
+}
+
 /**
  * @param string statusNum 色 yellow:ask, green:some one, red:no one
  * @param string message   表示文章
@@ -44,6 +72,7 @@ var storeMessage = function (color, message, user) {
                 return reject(err);
             }
         });
+        slackNotify(color, message, user);
 
         return resolve(data);
     });

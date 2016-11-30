@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "twitter": "~1.4.0",
-    "aws-sdk": "~2.7.7"
+    "aws-sdk": "~2.7.7",
+    "request": "^2.79.0",
+    "twitter": "~1.4.0"
   }
 }
