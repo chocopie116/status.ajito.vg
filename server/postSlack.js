@@ -1,4 +1,4 @@
-var message = require('./message');
+var message = require('./lib/message');
 
 exports.handler = function(event, context, callback) {
     var slackMessage = event.event.text;

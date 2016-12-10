@@ -1,5 +1,5 @@
 //var twitter = require('twitter');
-var message = require('./message');
+var message = require('./lib/message');
 
 //var client = new twitter({
 //    consumer_key        : process.env.TWITTER_CONSUMER_KEY,
