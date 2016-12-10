@@ -51,15 +51,16 @@
 
   </div>
   <script>
-var $image = $('#js-image');
 
 setTimeout(function() {
+  var $image = $('#js-image');
   $image.removeClass('darkness');
 }, 1000);
 
-$(function() {
-  var $dashboard = $('#dashboard');
 
+function updateMessages() {
+  var $dashboard = $('#dashboard');
+  $dashboard.empty();
   $.ajax({
     type: 'GET',
     url: 'https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages',
@@ -73,7 +74,7 @@ $(function() {
     }
   })
 
-});
+}
 
 function postPing() {
   $.ajax({
@@ -84,9 +85,15 @@ function postPing() {
     dataType: 'json',
     success: function(response) {
       console.log(response);
+      updateMessages();
     }
   })
 };
+
+$(function() {
+  updateMessages();
+});
+
   </script>
 </body>
 </html>
