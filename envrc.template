@@ -1,0 +1,9 @@
+#client
+##Api GatewaylambdaのURL(path込)
+export API_URL=
+#server
+##slack通知用
+export SLACK_WEBHOOK_URL=
+##dynamodb
+export AWS_ACCESS_KEY=
+export AWS_ACCESS_SECRET=

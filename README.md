@@ -8,13 +8,18 @@ Status page for ajito.vg
 People can ask there are ajiting people to #ajito.
 People can respond there are ajiting people.
 
+## Env
+```
+$ cat envrc.template
+```
+
 ## Architecture
 
-#### Client
-- S3 web site hosting
+### Client
+- S3 web site hosting(react.js)
+- Slack(slash command)
 
-#### Server
+#### API Server
 - API Gateway
 - AWS Lambda
 - Slack Incoming Webhook
-- Slack slash command

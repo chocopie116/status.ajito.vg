@@ -3,9 +3,11 @@ var ReactDom = require('react-dom');
 require('whatwg-fetch');
 
 var COLOR_ASK = 'yellow';
+var API_URL = process.env.MESSAGES_API_ENDPOINT;
+console.log(API_URL);
 
 var getMessages = function() {
-    return fetch('https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages')
+    return fetch(API_URL)
         .then(function(response) {
             return response.json();
         }).then(function(json) {
@@ -14,7 +16,7 @@ var getMessages = function() {
 };
 
 var postMessage = function (user, message) {
-    return fetch('https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages', {
+    return fetch(API_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
