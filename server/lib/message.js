@@ -1,5 +1,6 @@
 var AWS = require('aws-sdk');
 var request = require('request');
+var moment = require('moment');
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -51,8 +52,8 @@ var storeMessage = function (color, message, user) {
     message = message || DEFAULT_MESSAGES[color];
     user = user || 'annonymous';
 
-    var date = new Date();
-    var timestamp = Math.floor(date.getTime() / 1000 );
+    var now = moment();
+    var timestamp = now.unix();
     var params = {
         TableName: 'ajito.messages',
         Item: {
@@ -61,8 +62,7 @@ var storeMessage = function (color, message, user) {
             'status':    {"S": color},
             'user'  :    {"S": user},
             'message':   {"S": message},
-            'date':      {"S": String(date)}
-
+            'date':      {"S": String(now.format('YYYY/MM/DD h:mm:ss'))}
         }
     };
 
