@@ -30,7 +30,7 @@ var slackNotify = function(color, message, user) {
             username: user,
             text: SLACK_ICON_MAPS[color] + " " + message,
             icon_emoji: ':ajito:',
-            channel: '#ajiting'
+            channel: '#demo_1212'
         }
     };
     request.post(options, function(error, response, body){
