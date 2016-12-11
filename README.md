@@ -1,6 +1,9 @@
 # status.ajito.vg
 voyagegroupの社内フリースペース[ajito](https://voyagegroup.com/culture/environment/ajito/)に人がいるか気軽に尋ねることができるウェブアプリケーション
 
+## Demo
+http://status.ajito.vg.s3-website-ap-northeast-1.amazonaws.com/
+
 ## Abstract
 Serverless Architecture Application.
 
