@@ -21,31 +21,38 @@ var postMessage = function () {
     });
 };
 
-var MessageBox = React.createClass({
+var Application = React.createClass({
     getInitialState: function() {
         return {
             messages: [],
+            status: 'yellow'
         };
     },
-    postPing() {
+    postPing: function () {
         var _self = this;
         postMessage().then(function(response) {
-            _self.getMessages();
+            _self.updateMessagesState();
         }) ;
     },
-    getMessages() {
+    updateImageState: function(statusColor) {
+        this.setState({status: statusColor});
+    },
+    updateMessagesState: function() {
         var _self = this;
         getMessages().then(function(messages) {
             _self.setState({messages: messages});
+
+            var latestMessageStatus = messages[0].status;
+            _self.updateImageState(latestMessageStatus);
         });
     },
     componentDidMount: function() {
-        this.getMessages();
+        this.updateMessagesState();
     },
     render: function() {
         return (
             <div>
-                <img id="js-image" class="darkness img-responsive" src="img/ajito.jpg"></img>
+                <img id="js-image" className={this.state.status + " img-responsive"} src="img/ajito.jpg"></img>
 
                 <table className='table'>
                     <thead>
@@ -75,6 +82,6 @@ var MessageBox = React.createClass({
 });
 
 ReactDom.render(
-    <MessageBox/>,
-    document.querySelector('#js-content')
+    <Application />,
+    document.querySelector('#js-app')
 );
