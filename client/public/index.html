@@ -35,6 +35,7 @@
   <div class="container">
     <img id="js-image" class="darkness img-responsive" src="img/ajito.jpg">
 
+     <div id="js-content"></div>
      <table class="table">
      <thead>
        <tr>
@@ -69,8 +70,7 @@ function updateMessages() {
     success: function(response) {
       response.forEach(function(res) {
         //手抜き
-        $dashboard.append('<tr><th><img src="img/signal/' + res.status + '.png"></th> <td>' + res.created_at +'</td> <td>'+ res.user +'</td> <td>' + res.message + '</td> </tr>');
-      });
+        $dashboard.append('<tr><th><img src="img/signal/' + res.status + '.png"></th> <td>' + res.created_at +'</td> <td>'+ res.user +'</td> <td>' + res.message + '</td> </tr>'); });
     }
   })
 
@@ -94,6 +94,8 @@ $(function() {
   updateMessages();
 });
   </script>
+
+<script src="/dist/bundle.js"></script>
 
 </body>
 </html>
