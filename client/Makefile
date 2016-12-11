@@ -1,7 +1,7 @@
 WEBPACK :=./node_modules/.bin/webpack --progress --colors
 BUCKET_NAME := status.ajito.vg
 
-deploy:
+deploy: build
 	aws s3 sync --acl public-read public s3://$(BUCKET_NAME)
 
 server:
