@@ -1,12 +1,13 @@
-# status.ajito.vg
+# ajito-noren
+[ajito](https://voyagegroup.com/culture/environment/ajito/)に人がいるか気軽に尋ねることができるウェブアプリケーション
 
 ## Abstract
-Status page for ajito.vg
+Serverless Architecture Application.
 
 ![](/docs/architecture.png)
 
-- People can ask there are people in #ajito by web site.
-- People can respond there are people in #ajito by slack.
+- People can ask there are people in #ajiting by web site.
+- People can respond there are people in #ajiting by slack.
 
 ## Env
 ```
