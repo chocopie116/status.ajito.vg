@@ -60,8 +60,7 @@ var Application = React.createClass({
     componentDidMount: function() {
         this.updateMessagesState();
 
-        //5secごとに更新
-        var timerId = setInterval(this.updateMessagesState, 5000);
+        var timerId = setInterval(this.updateMessagesState, 3000 /* 3sec */);
         this.setState({timerId: timerId});
     },
     componentWillUnmount: function() {
