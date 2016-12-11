@@ -33,22 +33,7 @@
 
 <body>
   <div class="container">
-    <img id="js-image" class="darkness img-responsive" src="img/ajito.jpg">
-
      <div id="js-content"></div>
-     <table class="table">
-     <thead>
-       <tr>
-       <th>status</th>
-       <th>date</th>
-       <th>username</th>
-       <th>message</th>
-       </tr>
-     </thead>
-     <tbody id="dashboard">
-     </tbody>
-     </table>
-     <p onClick="postPing()">PING</p>
   </div>
 
   <script>
@@ -58,41 +43,6 @@ setTimeout(function() {
   $image.removeClass('darkness');
 }, 1000);
 
-
-function updateMessages() {
-  var $dashboard = $('#dashboard');
-  $dashboard.empty();
-  $.ajax({
-    type: 'GET',
-    url: 'https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages',
-    contentType: 'application/json',
-    dataType: 'json',
-    success: function(response) {
-      response.forEach(function(res) {
-        //手抜き
-        $dashboard.append('<tr><th><img src="img/signal/' + res.status + '.png"></th> <td>' + res.created_at +'</td> <td>'+ res.user +'</td> <td>' + res.message + '</td> </tr>'); });
-    }
-  })
-
-}
-
-function postPing() {
-  $.ajax({
-    type: 'POST',
-    url: 'https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages',
-    data: JSON.stringify({color:'yellow', message: 'いる?'}),
-    contentType: 'application/json',
-    dataType: 'json',
-    success: function(response) {
-      console.log(response);
-      updateMessages();
-    }
-  })
-};
-
-$(function() {
-  updateMessages();
-});
   </script>
 
 <script src="/dist/bundle.js"></script>
