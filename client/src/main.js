@@ -2,6 +2,8 @@ var React = require('react');
 var ReactDom = require('react-dom');
 require('whatwg-fetch');
 
+var COLOR_ASK = 'yellow';
+
 var getMessages = function() {
     return fetch('https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages')
         .then(function(response) {
@@ -11,13 +13,13 @@ var getMessages = function() {
         });
 };
 
-var postMessage = function () {
+var postMessage = function (user, message) {
     return fetch('https://11jf5hsmvi.execute-api.ap-northeast-1.amazonaws.com/production/messages', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({color:'yellow', message: 'いる?'})
+        body: JSON.stringify({color:COLOR_ASK, user: user, message: message})
     });
 };
 
@@ -25,12 +27,20 @@ var Application = React.createClass({
     getInitialState: function() {
         return {
             messages: [],
-            status: 'yellow'
+            status: 'yellow',
+            whoami: '',
+            message: '今どなたかいますか?'
         };
+    },
+    setWhoamiState: function(e) {
+        this.setState({whoami: e.target.value});
+    },
+    setMessageState: function(e) {
+        this.setState({message: e.target.value});
     },
     postPing: function () {
         var _self = this;
-        postMessage().then(function(response) {
+        postMessage(this.state.whoami, this.state.message).then(function(response) {
             _self.updateMessagesState();
         }) ;
     },
@@ -66,7 +76,7 @@ var Application = React.createClass({
 
                     <tbody>
                         { this.state.messages.map((message, index) => (
-                            <tr>
+                            <tr key={index}>
                                 <th><img src={'img/signal/' + message.status + '.png'}></img></th>
                                 <td>{message.created_at}</td>
                                 <td>{message.user}</td>
@@ -75,7 +85,17 @@ var Application = React.createClass({
                         ))}
                     </tbody>
                 </table>
-                <p onClick={ this.postPing }>PING</p>
+
+                <div className="form-inline">
+                  <div className="form-group">
+                    <label>username　</label>
+                    <input type="text" className="form-control" placeholder="whoami" value={ this.state.whoami } onChange={ this.setWhoamiState }></input>
+                    </div>
+                    <label>　message　</label>
+                    <input type="text" className="form-control" placeholder="hello" value={ this.state.message } onChange={ this.setMessageState }></input>　
+                    <button className="btn btn-default" onClick={ this.postPing }>PING</button>
+                </div>
+
             </div>
         )
     }
