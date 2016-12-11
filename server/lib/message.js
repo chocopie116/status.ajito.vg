@@ -52,7 +52,7 @@ var storeMessage = function (color, message, user) {
     message = message || DEFAULT_MESSAGES[color];
     user = user || 'annonymous';
 
-    var now = moment();
+    var now = moment().utcOffset('+09:00'); //Asia/Tokyo
     var timestamp = now.unix();
     var params = {
         TableName: 'ajito.messages',
@@ -62,7 +62,7 @@ var storeMessage = function (color, message, user) {
             'status':    {"S": color},
             'user'  :    {"S": user},
             'message':   {"S": message},
-            'date':      {"S": String(now.format('YYYY/MM/DD h:mm:ss'))}
+            'date':      {"S": String(now.format('YYYY/MM/DD HH:mm:ss'))}
         }
     };
 
