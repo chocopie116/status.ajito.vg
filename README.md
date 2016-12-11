@@ -5,8 +5,8 @@ Status page for ajito.vg
 
 ![](/docs/architecture.png)
 
-People can ask there are ajiting people to #ajito.
-People can respond there are ajiting people.
+- People can ask there are people in #ajito by web site.
+- People can respond there are people in #ajito by slack.
 
 ## Env
 ```
