@@ -29,7 +29,8 @@ var Application = React.createClass({
             messages: [],
             status: 'yellow',
             whoami: '',
-            message: '今どなたかいますか?'
+            message: '今どなたかいますか?',
+            timerId: null
         };
     },
     setWhoamiState: function(e) {
@@ -58,6 +59,13 @@ var Application = React.createClass({
     },
     componentDidMount: function() {
         this.updateMessagesState();
+
+        //5secごとに更新
+        var timerId = setInterval(this.updateMessagesState, 5000);
+        this.setState({timerId: timerId});
+    },
+    componentWillUnmount: function() {
+        clearInterval(this.state.timerId);
     },
     render: function() {
         return (
