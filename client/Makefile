@@ -9,6 +9,7 @@ server:
 	open http://localhost:3000
 
 build:
+	env | grep MESSAGES_API_ENDPOINT
 	$(WEBPACK)
 
 watch: 
