@@ -28,7 +28,7 @@ var slackNotify = function(color, message, user) {
         json: {
             username: user,
             text: SLACK_ICON_MAPS[color] + " " + message,
-            icon_emoji: ':ajiting:',
+            icon_emoji: ':ajito:',
             channel: '#ajiting'
         }
     };
