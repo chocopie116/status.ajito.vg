@@ -1,5 +1,5 @@
-# ajito-noren
-[ajito](https://voyagegroup.com/culture/environment/ajito/)に人がいるか気軽に尋ねることができるウェブアプリケーション
+# status.ajito.vg
+voyagegroupの社内フリースペース[ajito](https://voyagegroup.com/culture/environment/ajito/)に人がいるか気軽に尋ねることができるウェブアプリケーション
 
 ## Abstract
 Serverless Architecture Application.
